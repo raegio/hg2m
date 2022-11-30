@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="booking.end_date.posterior_to_start_date">
+                <source>booking.end_date.posterior_to_start_date</source>
+                <target>Cette valeur doit être postérieure à la date d'arrivée.</target>
+            </trans-unit>
+            <trans-unit id="booking.overlaps_with">
+                <source>booking.overlaps_with</source>
+                <target>La réservation se chevauche avec</target>
+            </trans-unit>
+            <trans-unit id="booking.id_from_to">
+                <source>booking.id_from_to</source>
+                <target>la réservation #{id} du {start_date} au {end_date}</target>
+            </trans-unit>
+            <trans-unit id="and">
+                <source>and</source>
+                <target>et</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

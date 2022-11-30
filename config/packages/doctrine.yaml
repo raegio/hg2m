@@ -15,6 +15,13 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        dql:
+            datetime_functions:
+                YEAR: App\DQL\Year
+            string_functions:
+                CAST: App\DQL\Cast
+            numeric_functions:
+                POWER: App\DQL\Power
 
 when@test:
     doctrine:

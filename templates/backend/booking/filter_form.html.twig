@@ -1,0 +1,5 @@
+{% form_theme form with ['backend/form/fields.html.twig'] %}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'autocomplete': 'off', 'data-controller': 'booking--filter', 'data-booking--filter-refresh-location-value': path('app_backend_booking_refreshFilter'), 'data-filter-location': path('app_backend_booking_list', {page: 1})}}) }}
+{{ form_widget(form) }}
+{{ form_rest(form) }}
+{{ form_end(form) }}{# #}

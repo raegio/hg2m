@@ -5,6 +5,11 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     locale: 'fr-fr'
+    bookings_parameters:
+        arrival_min_time: '15:00:00'
+        departure_max_time: '12:00:00'
+        # years_back must be greater than or equal to 1
+        years_back: 2
 
 services:
     # default configuration for services in *this* file
@@ -23,3 +28,8 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Repository\BookingRepository:
+        calls:
+            - setParameters: [ '%bookings_parameters%' ]
+        tags: ['doctrine.repository_service']

@@ -1,0 +1,35 @@
+{% import 'backend/utils.html.twig' as utils %}
+{% trans_default_domain 'admin' %}
+{% form_theme form with ['backend/form/fields.html.twig'] %}
+
+{% block body %}
+<div id="bookingModal" class="modal modal-lg" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-6"><span class="title">{{ 'booking'|trans~' #'~booking.id }}</span></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alerts">
+{{ utils.form_alerts(form, ['danger'], true) }}{# #}
+                </div>
+                <div class="form">
+{{ 'booking.confirm_deletion'| trans({id: booking.id})|raw }}
+{{ form_start(form) }}
+{% set cancelButton = form_widget(form.cancel, {'attr': {'data-action': 'booking--index#loadModal', 'data-location': path('app_backend_booking_edit', {page: bookings_page, id: booking.id, bookings_filter: bookings_filter.toArray}), 'class': 'btn-secondary'}}) %}
+{% set deleteButton = form_widget(form.delete, {'attr': {'data-action': 'booking--index#submitModal', 'data-submit': 'delete', 'data-location': path('app_backend_booking_delete', {page: bookings_page, id: booking.id, bookings_filter: bookings_filter.toArray}), 'class': 'btn-danger'}}) %}
+{{ form_rest(form) }}
+{{ form_end(form) }}{# #}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="buttons">
+                    {{ cancelButton|raw }}
+                    {{ deleteButton|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

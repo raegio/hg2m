@@ -9,6 +9,7 @@
 import './styles/app.scss';
 
 import 'bootstrap/js/src/alert.js';
+import 'bootstrap/js/src/dropdown.js';
 
 // start the Stimulus application
 import './bootstrap';
