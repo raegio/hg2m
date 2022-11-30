@@ -90,6 +90,19 @@ $utilities: map-merge(
 
 @import "~bootstrap/scss/close";
 
+@import "~bootstrap/scss/mixins/_caret";
+@import "~bootstrap/scss/dropdown";
+
+@import "~bootstrap/scss/button-group";
+
+@import "~bootstrap/scss/mixins/_pagination";
+@import "~bootstrap/scss/pagination";
+
+@import "~bootstrap/scss/card";
+
+@import "~bootstrap/scss/mixins/_backdrop";
+@import "~bootstrap/scss/modal";
+
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 
@@ -104,4 +117,44 @@ body {
 #loginSection {
   margin: 0 auto;
   max-width: 480px;
+}
+
+@include media-breakpoint-down(md) {
+  #bookingSection {
+    .input-group {
+      flex-wrap: wrap;
+    }
+
+    #bookings_filter_year {
+      flex: 25% !important;
+      border-bottom-left-radius: 0;
+    }
+    [for^="bookings_filter_status_"] {
+      flex: 25% !important;
+    }
+
+    [for="bookings_filter_status_2"] {
+      border-top-right-radius: $border-radius;
+    }
+
+    #bookings_filter_search {
+      flex: auto !important;
+      margin-left: 0;
+      margin-top: -1px;
+      border-bottom-left-radius: $border-radius;
+    }
+
+    #bookings_filter_filter {
+      margin-top: -1px;
+      border-top-right-radius: 0;
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  #bookingSection {
+    #bookings_filter_year {
+        flex: 0 1 content !important;
+    }
+  }
 }

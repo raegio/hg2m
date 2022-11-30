@@ -1,0 +1,46 @@
+{% extends 'backend/base.html.twig' %}
+{% import 'backend/utils.html.twig' as utils %}
+{% trans_default_domain 'admin' %}
+
+{% block body %}
+<section id="bookingSection" class="pt-3 mb-3" data-controller="booking--index">
+    <div class="modals">
+        <div id="bookingModal"></div>
+    </div>
+    <div class="alerts">
+{{ utils.alerts(['success'], true) }}{# #}
+    </div>
+    <div class="filter">
+{{ include('backend/booking/filter_form.html.twig', { form: form }) }}{# #}
+    </div>
+    <div class="pages">
+{{ utils.number_pagination('app_backend_booking_list', bookings_last_page, bookings_page, 'booking--index', {bookings_filter: bookings_filter.toArray}) }}
+    </div>
+    <div class="list">
+{% if rows|length > 0 %}
+        <div class="row g-3">
+{% for row in rows %}
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>{{ '#'~row.booking.id~' - '~row.booking.gite.name~' - '~('booking.status.'~booking_statuses[row.status])|trans }}</div>
+                            <div>{{ 'from_date'|trans~' '~row.booking.startDate|abbreviated_date(app.request.locale)~' '~'to_date'|trans~' '~row.booking.endDate|abbreviated_date(app.request.locale) }}</div>
+                            <div class="pt-3 d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary btn-sm" data-action="booking--index#showModal" data-location="{{ path('app_backend_booking_edit', {page: bookings_page, id: row.booking.id, bookings_filter: bookings_filter.toArray}) }}">{{ 'action.modify'|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endfor %}
+        </div>
+{% endif %}
+    </div>
+    <div class="buttons">
+        <div class="row pt-3">
+            <div class="col-12 d-flex justify-content-end">
+                <button type="button"class="btn btn-secondary" data-action="booking--index#showModal" data-location="{{ path('app_backend_booking_create', {page: bookings_page, bookings_filter: bookings_filter.toArray}) }}">{{ 'action.create'|trans }}</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

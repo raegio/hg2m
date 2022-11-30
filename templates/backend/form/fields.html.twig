@@ -1,0 +1,23 @@
+{% use "backend/form/bootstrap_5_layout.html.twig" %}
+{% trans_default_domain 'admin' %}
+
+{% block _bookings_filter_widget -%}
+<div class="input-group pt-3 mb-3">
+{{ form_widget(form.year, {'attr': {'data-booking--filter-target': 'year', 'data-action': 'booking--filter#refresh'}}) }}
+{{ form_widget(form.status, {'label_attr': {'class': 'btn btn-secondary'}}) }}
+{{ form_widget(form.search, {'attr': {'data-booking--filter-target': 'search'}}) }}
+{{ form_widget(form.filter, {'attr': {'data-action': 'booking--index#filter', 'class': 'btn-primary'}}) }}
+</div>
+{{ form_widget(form._token, {'attr': {'data-booking--filter-target': 'token'}}) }}
+{% endblock %}
+
+{% block _bookings_filter_status_widget -%}
+{%- for child in form %}
+    {{- form_widget(child, {
+        parent_label_class: label_attr.class|default(''),
+        translation_domain: choice_translation_domain,
+        valid: valid,
+        attr: {'data-booking--filter-target': 'status'}
+    }) -}}
+{% endfor -%}
+{% endblock %}

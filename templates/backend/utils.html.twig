@@ -12,3 +12,48 @@
 {% endif %}
 </div>
 {% endmacro %}
+
+{% macro alerts(types, dismissible) %}
+{% import _self as self %}
+{% for type, messages in app.flashes(types) %}
+{% if messages|length > 0 %}
+{{ self.alert(type, messages, dismissible) }}
+{% endif %}
+{% endfor %}
+{% endmacro %}
+
+{% macro number_pagination(route_name, pages_count, page, link_controller, parameters = {}) %}
+<ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item{{ 1 == page ? ' disabled' : '' }}">
+        <a class="page-link" href="{{ 1 == page ? '#' : path(route_name, parameters|merge({ 'page': page - 1 })) }}" data-{{ link_controller }}-target="pageLink" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+{% for p in 1..pages_count %}
+{% if p == page %}
+    <li class="page-item active"><a class="page-link" href="#" data-{{ link_controller }}-target="pageLink">{{ p }}</a></li>
+{% else %}
+    <li class="page-item"><a class="page-link" href="{{ path(route_name, parameters|merge({ 'page': p })) }}" data-{{ link_controller }}-target="pageLink">{{ p }}</a></li>
+{% endif %}
+{% endfor %}
+    <li class="page-item{{ pages_count == page ? ' disabled' : '' }}">
+        <a class="page-link" href="{{ pages_count == page ? '#' : path(route_name, parameters|merge({ 'page': page + 1 })) }}" data-{{ link_controller }}-target="pageLink" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</ul>
+{% endmacro %}
+
+{% macro form_alerts(form, types, dismissible) %}
+{% import _self as self %}
+{% for type, messages in app.flashes(types) %}
+{% if type == 'danger' and form.vars.errors|length > 0 %}
+{% for error in form.vars.errors %}
+{% set messages = messages|merge([error.message]) %}
+{% endfor %}
+{% endif %}
+{% if messages|length > 0 %}
+{{ self.alert(type, messages, dismissible) }}
+{% endif %}
+{% endfor %}
+{% endmacro %}

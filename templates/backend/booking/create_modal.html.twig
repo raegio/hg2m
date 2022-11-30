@@ -1,0 +1,35 @@
+{% import 'backend/utils.html.twig' as utils %}
+{% trans_default_domain 'admin' %}
+{% form_theme form with ['backend/form/fields.html.twig'] %}
+
+{% block body %}
+<div id="bookingModal" class="modal modal-lg" tabindex="-1" data-list-location="{{ path('app_backend_booking_list', { page: bookings_page, bookings_filter: bookings_filter.toArray }) }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-6"><span class="title">{{ 'new_booking'|trans }}</span></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alerts">
+{{ utils.form_alerts(form, ['danger'], true) }}{# #}
+                </div>
+                <div class="form">
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'autocomplete': 'off', 'class': 'row g-3'}}) }}
+{{ form_row(form.start_date, {'row_attr': {'class': 'col-12 col-sm-6 col-lg-4'}}) }}
+{{ form_row(form.end_date, {'row_attr': {'class': 'col-12 col-sm-6 col-lg-4'}}) }}
+{{ form_row(form.gite, {'row_attr': {'class': 'col-12 col-sm-6 col-lg-4'}}) }}
+{% set saveButton = form_widget(form.save, {'label': 'action.create', 'attr': {'data-action': 'booking--index#submitModal', 'data-submit': 'create', 'data-location': path('app_backend_booking_create', {page: bookings_page, bookings_filter: bookings_filter.toArray}), 'class': 'btn-primary'}}) %}
+{{ form_rest(form) }}
+{{ form_end(form) }}{# #}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="buttons">
+                    {{ saveButton|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
