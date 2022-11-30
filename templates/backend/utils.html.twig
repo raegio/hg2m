@@ -1,0 +1,14 @@
+{% trans_default_domain 'admin' %}
+
+{% macro alert(type, messages, dismissible) %}
+<div class="alert alert-{{ type }}{% if dismissible %} alert-dismissible{% endif %}" role="alert">
+    <ul>
+{% for message in messages %}
+        <li>{{ message|raw }}</li>
+{% endfor %}
+    </ul>
+{% if dismissible %}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+{% endif %}
+</div>
+{% endmacro %}
