@@ -3,16 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}{% endblock %}HG2M</title>
+        <meta name="robots" content="noindex, nofollow">
+        <title>{% block title %}{% endblock %}HG2M admin</title>
 {% block stylesheets %}
-            {{ encore_entry_link_tags('app', null, 'frontend') }}
+            {{ encore_entry_link_tags('app', null, 'backend') }}
 {% endblock %}
 {% block javascripts %}
-            {{ encore_entry_script_tags('app', null, 'frontend') }}
+            {{ encore_entry_script_tags('app', null, 'backend') }}
 {% endblock %}
     </head>
     <body>
-        <div id="app">
+        <div id="app" class="container">
 {% block body %}{% endblock %}
         </div>
     </body>

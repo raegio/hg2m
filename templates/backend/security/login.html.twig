@@ -1,0 +1,27 @@
+{% extends 'backend/base.html.twig' %}
+{% import 'backend/utils.html.twig' as utils %}
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{ 'login'|trans }} &middot; {% endblock %}
+
+{% block body %}
+<section id="loginSection" class="pt-3 mb-3">
+{% if error %}
+    {{ utils.alert('danger', [ error.messageKey|trans(error.messageData, 'security') ], true) }}{# #}
+{% endif %}
+    <form action="{{ path('app_backend_security_login') }}" method="post" class="row g-3">
+        <div class="col-12 col-sm-6">
+            <label for="email" class="form-label">{{ 'email'|trans }}</label>
+            <input type="text" id="email" name="_email" value="{{ last_username }}" class="form-control" />
+        </div>
+        <div class="col-12 col-sm-6">
+            <label for="password" class="form-label">{{ 'password'|trans }}</label>
+            <input type="password" id="password" name="_password" class="form-control" />
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-secondary">{{ 'action.login'|trans }}</button>
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    </form>
+</section>
+{% endblock %}

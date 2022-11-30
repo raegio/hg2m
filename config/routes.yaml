@@ -1,3 +1,8 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+backend_controllers:
+    resource: ../src/Controller/Backend/
+    type: annotation
+    prefix: /admin

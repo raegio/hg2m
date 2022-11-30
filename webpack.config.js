@@ -8,9 +8,9 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
+    .setOutputPath('public/build/frontend/')
     // public path used by the web server to access the output path
-    .setPublicPath('/build')
+    .setPublicPath('/build/frontend')
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')
 
@@ -57,7 +57,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -73,4 +73,30 @@ Encore
     //.autoProvidejQuery()
 ;
 
-module.exports = Encore.getWebpackConfig();
+const frontendConfig = Encore.getWebpackConfig();
+frontendConfig.name = 'frontend';
+
+Encore.reset();
+
+Encore
+    .setOutputPath('public/build/backend/')
+    .setPublicPath('/build/backend')
+    .addEntry('app', './assets/backend/app.js')
+    .enableStimulusBridge('./assets/backend/controllers.json')
+    .splitEntryChunks()
+    .enableSingleRuntimeChunk()
+    .cleanupOutputBeforeBuild()
+    .enableBuildNotifications()
+    .enableSourceMaps(!Encore.isProduction())
+    .enableVersioning(Encore.isProduction())
+    .configureBabelPresetEnv((config) => {
+        config.useBuiltIns = 'usage';
+        config.corejs = '3.23';
+    })
+    .enableSassLoader()
+;
+
+const backendConfig = Encore.getWebpackConfig();
+backendConfig.name = 'backend';
+
+module.exports = [ frontendConfig, backendConfig ];

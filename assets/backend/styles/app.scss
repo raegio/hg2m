@@ -1,0 +1,107 @@
+$include-column-box-sizing: true !default;
+
+@import "~bootstrap/scss/functions";
+@import "./variables";
+@import "~bootstrap/scss/maps";
+
+@import "~bootstrap/scss/mixins/lists";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~bootstrap/scss/mixins/container";
+@import "~bootstrap/scss/mixins/grid";
+@import "~bootstrap/scss/mixins/utilities";
+
+@import "~bootstrap/scss/vendor/rfs";
+
+@import "~bootstrap/scss/root";
+
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+
+@import "~bootstrap/scss/utilities";
+// Only use the utilities we need
+// stylelint-disable-next-line scss/dollar-variable-default
+$utilities: map-get-multiple(
+  $utilities,
+  (
+    "display",
+//    "order",
+    "flex",
+//    "flex-direction",
+//    "flex-grow",
+//    "flex-shrink",
+//    "flex-wrap",
+    "justify-content",
+//    "align-items",
+//    "align-content",
+//    "align-self",
+//    "margin",
+//    "margin-x",
+//    "margin-y",
+//    "margin-top",
+//    "margin-end",
+    "margin-bottom",
+//    "margin-start",
+//    "negative-margin",
+//    "negative-margin-x",
+//    "negative-margin-y",
+//    "negative-margin-top",
+//    "negative-margin-end",
+//    "negative-margin-bottom",
+//    "negative-margin-start",
+//    "padding",
+//    "padding-x",
+//    "padding-y",
+    "padding-top",
+//    "padding-end",
+//    "padding-bottom",
+//    "padding-start",
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "font-size": (
+      rfs: true,
+      property: font-size,
+      class: fs,
+      values: $font-sizes
+    ),
+  )
+);
+
+@import "~bootstrap/scss/utilities/api";
+
+
+@import "~bootstrap/scss/mixins/_border-radius";
+@import "~bootstrap/scss/reboot";
+
+@import "~bootstrap/scss/mixins/_buttons";
+@import "~bootstrap/scss/mixins/_transition";
+@import "~bootstrap/scss/mixins/_box-shadow";
+@import "~bootstrap/scss/mixins/_gradients";
+@import "~bootstrap/scss/buttons";
+
+@import "~bootstrap/scss/mixins/_forms";
+@import "~bootstrap/scss/forms";
+
+@import "~bootstrap/scss/mixins/_alert";
+@import "~bootstrap/scss/alert";
+
+@import "~bootstrap/scss/close";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f3f3f3;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#loginSection {
+  margin: 0 auto;
+  max-width: 480px;
+}
